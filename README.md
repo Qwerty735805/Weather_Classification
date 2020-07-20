@@ -2,10 +2,10 @@
 
 
 Link to Dataset : https://www.kaggle.com/jagadeesh23/weather-classification
-
+<br>
 Link to pre-trained model : https://drive.google.com/drive/folders/1cxkEPGQle4If5fjET-87RSJouynsrngi?usp=sharing
-
-For testing the model:
+<br>
+For testing the model:<br>
  -> Create a virtual environment, and install the dependencies mentioned in requirements.txt   
  <br>
  -> Download the pretrained model from the above link.
