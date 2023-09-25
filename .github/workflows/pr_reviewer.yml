@@ -8,8 +8,7 @@ g = Github(os.getenv("GITHUB_TOKEN"))
 
 repo = g.get_repo(os.getenv("GITHUB_REPOSITORY"))
 
-with open(os.getenv("GITHUB_EVENT_PATH")) as event_file:
-    event = json.load(event_file)
+event = json.load(open(os.getenv("GITHUB_EVENT_PATH")))
 
 pr_number = event["pull_request"]["number"]  # Get the PR number from the event payload
 pr = repo.get_pull(pr_number)
