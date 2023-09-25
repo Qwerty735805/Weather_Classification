@@ -26,7 +26,13 @@ for file in pr.get_files():
         base_content = repo.get_contents(file.filename, ref=base).decoded_content.decode().splitlines()
 
         diff = difflib.context_diff(base_content, changed_content, fromfile=base, tofile=head)
-
+        print('V-----------------------------------')
+        print('V-----------------------------------')
+        print('V-----------------------------------V')
         print(''.join(diff))
+        print('^-----------------------------------^')
+        print('^-----------------------------------^')
+        print('^-----------------------------------^')
+        
     except Exception as e:
         print(f"Could not compare file: {file.filename}. Reason: {str(e)}")
