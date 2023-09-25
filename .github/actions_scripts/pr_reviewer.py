@@ -6,7 +6,13 @@ import difflib
 g = Github(os.getenv("GITHUB_TOKEN"))
 
 repo = g.get_repo(os.getenv("GITHUB_REPOSITORY"))
-pr = repo.get_pull(os.getenv("GITHUB_REF").split('/')[-1])
+
+with open(os.getenv("GITHUB_EVENT_PATH")) as event_file:
+    event = json.load(event_file)
+
+pr_number = event["pull_request"]["number"]  # Get the PR number from the event payload
+pr = repo.get_pull(pr_number)
+# pr = repo.get_pull(os.getenv("GITHUB_REF").split('/')[-1])
 
 base = pr.base.ref
 head = pr.head.ref
