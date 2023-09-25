@@ -10,3 +10,5 @@ file_path=''
 
 
 cv2.imwrite("test.png",picture)
+
+import json
