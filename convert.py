@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import json
 #Path of the image
 file_path=''
 
