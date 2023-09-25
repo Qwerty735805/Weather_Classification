@@ -1,0 +1,25 @@
+from github import Github
+import os
+import difflib
+
+# Ensure to put your own GitHub token here.
+g = Github(os.getenv("GITHUB_TOKEN"))
+
+repo = g.get_repo(os.getenv("GITHUB_REPOSITORY"))
+pr = repo.get_pull(os.getenv("GITHUB_REF").split('/')[-1])
+
+base = pr.base.ref
+head = pr.head.ref
+
+for file in pr.get_files():
+    try:
+        with open(file.filename, 'r') as changed_file:
+            changed_content = changed_file.read().splitlines()
+
+        base_content = repo.get_contents(file.filename, ref=base).decoded_content.decode().splitlines()
+
+        diff = difflib.context_diff(base_content, changed_content, fromfile=base, tofile=head)
+
+        print(''.join(diff))
+    except Exception as e:
+        print(f"Could not compare file: {file.filename}. Reason: {str(e)}")
