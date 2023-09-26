@@ -27,3 +27,5 @@ jobs:
           pip install openai
       - name: Execute script
         run: python .github/actions_scripts/pr_reviewer.py
+        env:
+          OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
