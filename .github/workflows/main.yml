@@ -1,0 +1,31 @@
+name: PR Reviewer
+
+# controls when the action will run
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout 
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # this is required to fetch all history
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install PyGithub
+          pip install openai
+      - name: Execute script
+        run: python .github/actions_scripts/pr_reviewer.py
+        env:
+          OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
